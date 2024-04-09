@@ -3,7 +3,7 @@ const User = require("../models/User");
 const Post = require("../models/Post");
 
 //CREATE POST
-router.post("/", async (req, res) => {
+router.post("/add", async (req, res) => {
   console.log(req.body)
   const newPost = new Post(req.body);
   try {
@@ -17,6 +17,7 @@ router.post("/", async (req, res) => {
 
 //UPDATE POST
 router.put("/:id", async (req, res) => {
+  console.log(req.body)
   try {
     const post = await Post.findById(req.params.id);
     if (post.username === req.body.username) {
@@ -42,7 +43,6 @@ router.put("/:id", async (req, res) => {
 
 //DELETE POST
 router.delete("/:id", async (req, res) => {
-  
   try {
     const post = await Post.findById(req.params.id);
     console.log(post)
