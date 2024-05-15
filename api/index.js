@@ -8,10 +8,23 @@ const postRoute = require("./routes/posts");
 const categoryRoute = require("./routes/categories");
 const multer = require("multer");
 const path = require("path");
+const statusMonitor = require('express-status-monitor');
+
 
 dotenv.config();
 app.use(express.json());
 app.use("/images", express.static(path.join(__dirname, "/images")));
+app.use(statusMonitor());
+
+// Dashboard'a erişim için rota oluşturun
+app.get('/status', (req, res) => {
+  res.send('<h1>Express Status Dashboard</h1>');
+});
+
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => {
+    console.log(`Server is running on port ${PORT}`);
+});
 
 mongoose.connect(process.env.MONGO_URL)
   .then(() => {

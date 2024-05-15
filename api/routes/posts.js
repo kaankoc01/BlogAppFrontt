@@ -3,7 +3,7 @@ const User = require("../models/User");
 const Post = require("../models/Post");
 
 //CREATE POST
-router.post("/add", async (req, res) => {
+router.post("/", async (req, res) => {
   console.log(req.body)
   const newPost = new Post(req.body);
   try {
